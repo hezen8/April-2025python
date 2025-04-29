@@ -1,0 +1,6 @@
+print ("welcome to python programming")
+print ("Topics")
+print ("****************")
+print ("Introduction 1 ")
+print ("Variables and data types")
+print ("Control structures")
