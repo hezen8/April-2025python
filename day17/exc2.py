@@ -23,8 +23,11 @@ def add(contacts):
     name=input("Enter name")
     phone=input("Enter phone number")
     email=input("Enter an email")
-    # if len(phone)<10:
-    #     print("incomplete phone number")
+    try:
+        len(phone)<10
+        print("PHONE NUMBER IS INCOMPLETE")
+    except:
+        print("proceed")
     if name not in contacts:
         contacts[name]={"Tel":phone,"email":email}
         print("contact added successfully")
