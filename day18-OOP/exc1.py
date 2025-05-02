@@ -1,6 +1,6 @@
 import account
 
-acc1=account.Account(1111,"alex",500)
+# acc1=account.Account(1111,"alex",500)
 # acc1.getBalance()
 # print(acc1.getBalance())
 
@@ -26,7 +26,8 @@ def Deposit(amount):
     amount=int(input("Enter amount to deposit"))
     bal+=amount
     print(f"deposit of {amount} was successful and balance is {bal}")
- 
+
+     
 def withdraw(amount):
     if amount>balance:
           print("Insufficient funds in your account")
