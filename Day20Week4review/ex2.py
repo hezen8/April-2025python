@@ -41,9 +41,33 @@ def purchase_item():
         transaction.purchase_item(item2)
     elif itemChoice==3:
         transaction.purchase_item(item3)   
+    choice=getMenu()
+    return choice
+
+def showItems(itemsList):
+    for item in itemsList:
+       print(f"{item.description} {item.price}")
+    
+def showTotal(itemsList):
+    total=0
+    for item in itemsList:
+        total+=item.price
+    print(f"Total amount is KShs {total:.2f}")
 
 def main():
     choice=getMenu()
-    if choice==1:
-        purchase_item()
+    while choice!=4:
+        if choice==1:
+            purchase_item()
+            main()
+        elif choice==2:
+            showItems(itemsList)
+            main()
+        elif choice==3:
+            showTotal(itemsList)
+            main()
+        elif choice==4:
+            SystemExit()
+            main()    
+            
 main()
