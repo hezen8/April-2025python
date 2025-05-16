@@ -1,6 +1,11 @@
 #using python to acces sqlite database
+#orm Object relational mapper
+#formatted string(f"")
+#formats your text
+#adding a scrollbar
 import sqlite3
 from tkinter import*
+from tkinter import messagebox
 
 root=Tk()
 root.title("My Database")
@@ -12,7 +17,7 @@ c=conn.cursor()
 def addBook():
     conn=sqlite3.connect("books.db")
     c=conn.cursor()
-    queryString=f"INSERT INTO books VALUES (\'{txtBookTitle.get()}\',\'{txtBookPrice.get()}\')"
+    queryString=f"INSERT INTO books (\'{txtBookPrice.get()}\',\'{txtBookTitle.get()}\')"
     c.execute(queryString)
     conn.commit()
     conn.close()
@@ -77,18 +82,10 @@ def UpdateBook():
 
         btitle=txtBookTitleUpdate.get()
         bprice=txtBookPriceUpdate.get()
-        queryString=f"""UPDATE books SET
-        BookTitle={btitle},BookPrice={bprice},WHERE rowid={bookID}
-        """,
-        # queryString="""UPDATE books SET 
-        # BookTitle=:btitle,
-        # BookPrice=:bprice,
-        # WHERE rowid=oid
-        # """,{
-        #     'btitle':txtBookTitleUpdate.get(),
-        #     'bprice':txtBookPriceUpdate.get()
-        # }
-        c.execute(queryString)
+        
+        c.execute("""UPDATE books SET
+        BookTitle=?, BookPrice=?
+        WHERE rowid=oid""", (btitle,bprice))
         conn.commit()
         conn.close()
 
@@ -97,7 +94,6 @@ def UpdateBook():
 
     conn.commit()
     conn.close()
-    
 
 
 lblTitle=Label(root,text="BOOKS LIBRARY",bg="lightblue")   
@@ -130,9 +126,6 @@ btnAddRecord.grid(row=4,column=0,columnspan=2, ipadx=100)
 
 btnUpdateBook=Button(root,text="Update Book",command=UpdateBook,bg="magenta")
 btnUpdateBook.grid(row=9,column=0,columnspan=2,ipadx=100,pady=10)
-
-
-
 
 conn.commit()
 conn.close()
